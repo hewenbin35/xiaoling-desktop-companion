@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>绫濑澪</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="desktop-pet">
+      <section class="avatar-stage" id="avatarStage" aria-label="绫濑澪桌宠">
+        <div class="bubble hidden" id="bubble"></div>
+        <button class="pet-close-button hit-area" id="petCloseButton" type="button" aria-label="关闭小澪" title="关闭">×</button>
+        <button class="avatar-button hit-area" id="avatarButton" type="button" aria-label="呼出绫濑澪">
+          <span class="sprite" aria-hidden="true"></span>
+        </button>
+      </section>
+
+      <form class="mini-reply hidden hit-area" id="miniReply" aria-label="回复小澪">
+        <input id="miniInput" autocomplete="off" placeholder="回她一句..." />
+        <button type="submit">回</button>
+      </form>
+
+      <section class="chat-panel hidden hit-area" id="chatPanel" aria-label="大界面">
+        <header class="panel-header">
+          <div>
+            <h1>绫濑澪</h1>
+            <p>双击小澪进入大界面</p>
+          </div>
+          <div class="header-actions">
+            <button id="observeButton" class="icon-button" type="button" title="看一眼桌面">◐</button>
+            <button id="settingsButton" class="icon-button" type="button" title="设置">⚙</button>
+            <button id="collapseButton" class="icon-button" type="button" title="收起">×</button>
+          </div>
+        </header>
+
+        <div class="messages" id="messages"></div>
+
+        <form class="composer" id="composer">
+          <textarea id="messageInput" rows="2" placeholder="认真聊一会儿..."></textarea>
+          <button type="submit">发送</button>
+        </form>
+
+        <nav class="quick-actions" aria-label="快捷动作">
+          <button data-action="todo" type="button">待办</button>
+          <button data-action="reminder" type="button">提醒</button>
+          <button data-action="memory" type="button">记忆</button>
+          <button data-action="launch" type="button">白名单</button>
+        </nav>
+      </section>
+
+      <section class="settings-panel hidden hit-area" id="settingsPanel" aria-label="设置">
+        <div class="settings-shell">
+          <header class="panel-header">
+            <div>
+              <h2>设置</h2>
+              <p>API、主动性、桌面识别和记忆</p>
+            </div>
+            <button id="closeSettingsButton" class="icon-button" type="button" title="关闭">×</button>
+          </header>
+
+          <div class="tabs">
+            <button class="tab selected" data-tab="api" type="button">API</button>
+            <button class="tab" data-tab="memory" type="button">记忆</button>
+            <button class="tab" data-tab="tasks" type="button">待办</button>
+            <button class="tab" data-tab="tools" type="button">白名单</button>
+          </div>
+
+          <div class="tab-page" id="tab-api">
+            <label>Base URL<input id="apiBaseURL" autocomplete="off" /></label>
+            <label>API Key<input id="apiKey" type="password" autocomplete="off" /></label>
+            <label>Model<input id="apiModel" autocomplete="off" /></label>
+            <div class="split-row">
+              <label class="checkbox"><input id="voiceEnabled" type="checkbox" /> 回复朗读</label>
+              <label class="checkbox"><input id="screenAwarenessEnabled" type="checkbox" /> 识别桌面主动聊天</label>
+            </div>
+            <div class="split-row">
+              <label>桌面识别间隔秒<input id="screenAwarenessInterval" type="number" min="30" max="900" /></label>
+              <label>小澪服装
+                <select id="avatarOutfit">
+                  <option value="work">工作服</option>
+                  <option value="sailor">水手服</option>
+                  <option value="qipao">旗袍</option>
+                  <option value="teacher">老师服</option>
+                  <option value="swimsuit">泳装</option>
+                  <option value="bikini">比基尼</option>
+                </select>
+              </label>
+            </div>
+            <div class="split-row">
+              <label>主动性
+                <select id="presenceLevel">
+                  <option value="high">高存在感</option>
+                  <option value="normal">普通</option>
+                  <option value="low">安静</option>
+                  <option value="off">关闭</option>
+                </select>
+              </label>
+              <label>主动间隔秒<input id="presenceInterval" type="number" min="10" max="600" /></label>
+            </div>
+            <div class="split-row">
+              <label class="checkbox"><input id="quietHoursEnabled" type="checkbox" /> 安静时段</label>
+              <label>开始<input id="quietStart" type="time" /></label>
+              <label>结束<input id="quietEnd" type="time" /></label>
+            </div>
+            <button id="saveSettingsButton" type="button">保存设置</button>
+            <button id="resetDataButtonApi" class="danger-button" type="button">重新开始：清除记忆和聊天记录</button>
+          </div>
+
+          <div class="tab-page hidden" id="tab-memory">
+            <div class="split-row">
+              <label class="checkbox"><input id="memoryEnabled" type="checkbox" /> 启用长期记忆</label>
+              <label class="checkbox"><input id="memoryExplicitOnly" type="checkbox" /> 只在你明确要求时自动记</label>
+            </div>
+            <button id="resetDataButton" class="danger-button" type="button">重新开始：清除记忆和聊天记录</button>
+            <div id="memoryList" class="list"></div>
+          </div>
+
+          <div class="tab-page hidden" id="tab-tasks">
+            <form id="todoForm" class="inline-form">
+              <input id="todoInput" placeholder="新的待办" />
+              <button type="submit">添加</button>
+            </form>
+            <form id="reminderForm" class="inline-form">
+              <input id="reminderInput" placeholder="例如：明天下午三点提醒我交作业" />
+              <button type="submit">提醒</button>
+            </form>
+            <div id="todoList" class="list"></div>
+            <div id="reminderList" class="list"></div>
+          </div>
+
+          <div class="tab-page hidden" id="tab-tools">
+            <form id="launchForm" class="inline-form launch-form">
+              <input id="launchName" placeholder="名字" />
+              <input id="launchTarget" placeholder="网址或应用路径" />
+              <select id="launchKind">
+                <option value="url">网页</option>
+                <option value="app">应用</option>
+              </select>
+              <button type="submit">添加</button>
+            </form>
+            <div id="launchList" class="list"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="src/renderer/app.js"></script>
+  </body>
+</html>

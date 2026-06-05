@@ -1,0 +1,550 @@
+:root {
+  --ink: #23242a;
+  --muted: #6e7180;
+  --paper: rgba(255, 252, 247, 0.95);
+  --line: rgba(75, 69, 88, 0.16);
+  --rose: #e4778b;
+  --shadow: rgba(35, 36, 42, 0.22);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  color: var(--ink);
+  font-family: "Microsoft YaHei", "PingFang SC", system-ui, sans-serif;
+  background: transparent;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.desktop-pet {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  padding: 10px;
+  background: transparent;
+  pointer-events: none;
+}
+
+.avatar-stage {
+  position: absolute;
+  right: 18px;
+  bottom: 14px;
+  display: grid;
+  justify-items: center;
+  width: 170px;
+  -webkit-app-region: no-drag;
+  pointer-events: none;
+}
+
+.hit-area {
+  pointer-events: auto;
+}
+
+.avatar-button {
+  position: relative;
+  width: 164px;
+  height: 252px;
+  padding: 0;
+  overflow: visible;
+  background: transparent;
+  border: 0;
+  filter: drop-shadow(0 16px 22px rgba(40, 31, 52, 0.24));
+}
+
+.pet-close-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 5;
+  display: grid;
+  width: 26px;
+  height: 26px;
+  place-items: center;
+  color: #5b3f48;
+  background: rgba(255, 248, 250, 0.88);
+  border: 1px solid rgba(228, 119, 139, 0.42);
+  border-radius: 8px;
+  box-shadow: 0 8px 18px rgba(35, 36, 42, 0.16);
+  opacity: 0;
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.avatar-stage:hover .pet-close-button,
+.pet-close-button:focus-visible {
+  opacity: 1;
+}
+
+.pet-close-button:hover {
+  transform: translateY(-1px);
+}
+
+.sprite {
+  display: block;
+  width: 164px;
+  height: 252px;
+  background: url("assets/xiaoling-work-neutral.png") center bottom / contain no-repeat;
+  animation: breathe 2.8s ease-in-out infinite;
+}
+
+.avatar-button[data-emotion="happy"] .sprite,
+.avatar-button[data-emotion="proud"] .sprite {
+  animation: happy-bounce 1.15s ease-in-out infinite;
+}
+
+.avatar-button[data-emotion="angry"] .sprite {
+  animation: angry-shake 0.36s ease-in-out infinite;
+}
+
+.avatar-button[data-emotion="sad"] .sprite {
+  animation: sad-sway 2.2s ease-in-out infinite;
+  filter: saturate(0.9);
+}
+
+.avatar-button[data-emotion="pout"] .sprite {
+  animation: pout-sulk 1.8s ease-in-out infinite;
+  filter: saturate(0.92) contrast(0.98);
+}
+
+.avatar-button[data-emotion="blush"] .sprite,
+.avatar-button[data-emotion="shy"] .sprite {
+  animation: shy-bob 2s ease-in-out infinite;
+}
+
+.avatar-button[data-outfit="work"][data-emotion="neutral"] .sprite { background-image: url("assets/xiaoling-work-neutral.png"); }
+.avatar-button[data-outfit="work"][data-emotion="happy"] .sprite { background-image: url("assets/xiaoling-work-happy.png"); }
+.avatar-button[data-outfit="work"][data-emotion="angry"] .sprite { background-image: url("assets/xiaoling-work-angry.png"); }
+.avatar-button[data-outfit="work"][data-emotion="sad"] .sprite { background-image: url("assets/xiaoling-work-sad.png"); }
+.avatar-button[data-outfit="work"][data-emotion="blush"] .sprite,
+.avatar-button[data-outfit="work"][data-emotion="shy"] .sprite { background-image: url("assets/xiaoling-work-blush.png"); }
+.avatar-button[data-outfit="work"][data-emotion="pout"] .sprite { background-image: url("assets/xiaoling-work-pout.png"); }
+.avatar-button[data-outfit="work"][data-emotion="proud"] .sprite { background-image: url("assets/xiaoling-work-proud.png"); }
+
+.avatar-button[data-outfit="sailor"][data-emotion="neutral"] .sprite { background-image: url("assets/xiaoling-sailor-neutral.png"); }
+.avatar-button[data-outfit="sailor"][data-emotion="happy"] .sprite { background-image: url("assets/xiaoling-sailor-happy.png"); }
+.avatar-button[data-outfit="sailor"][data-emotion="angry"] .sprite { background-image: url("assets/xiaoling-sailor-angry.png"); }
+.avatar-button[data-outfit="sailor"][data-emotion="sad"] .sprite { background-image: url("assets/xiaoling-sailor-sad.png"); }
+.avatar-button[data-outfit="sailor"][data-emotion="blush"] .sprite,
+.avatar-button[data-outfit="sailor"][data-emotion="shy"] .sprite { background-image: url("assets/xiaoling-sailor-blush.png"); }
+.avatar-button[data-outfit="sailor"][data-emotion="pout"] .sprite { background-image: url("assets/xiaoling-sailor-pout.png"); }
+.avatar-button[data-outfit="sailor"][data-emotion="proud"] .sprite { background-image: url("assets/xiaoling-sailor-proud.png"); }
+
+.avatar-button[data-outfit="qipao"][data-emotion="neutral"] .sprite { background-image: url("assets/xiaoling-qipao-neutral.png"); }
+.avatar-button[data-outfit="qipao"][data-emotion="happy"] .sprite { background-image: url("assets/xiaoling-qipao-happy.png"); }
+.avatar-button[data-outfit="qipao"][data-emotion="angry"] .sprite { background-image: url("assets/xiaoling-qipao-angry.png"); }
+.avatar-button[data-outfit="qipao"][data-emotion="sad"] .sprite { background-image: url("assets/xiaoling-qipao-sad.png"); }
+.avatar-button[data-outfit="qipao"][data-emotion="blush"] .sprite,
+.avatar-button[data-outfit="qipao"][data-emotion="shy"] .sprite { background-image: url("assets/xiaoling-qipao-blush.png"); }
+.avatar-button[data-outfit="qipao"][data-emotion="pout"] .sprite { background-image: url("assets/xiaoling-qipao-pout.png"); }
+.avatar-button[data-outfit="qipao"][data-emotion="proud"] .sprite { background-image: url("assets/xiaoling-qipao-proud.png"); }
+
+.avatar-button[data-outfit="teacher"][data-emotion="neutral"] .sprite { background-image: url("assets/xiaoling-teacher-neutral.png"); }
+.avatar-button[data-outfit="teacher"][data-emotion="happy"] .sprite { background-image: url("assets/xiaoling-teacher-happy.png"); }
+.avatar-button[data-outfit="teacher"][data-emotion="angry"] .sprite { background-image: url("assets/xiaoling-teacher-angry.png"); }
+.avatar-button[data-outfit="teacher"][data-emotion="sad"] .sprite { background-image: url("assets/xiaoling-teacher-sad.png"); }
+.avatar-button[data-outfit="teacher"][data-emotion="blush"] .sprite,
+.avatar-button[data-outfit="teacher"][data-emotion="shy"] .sprite { background-image: url("assets/xiaoling-teacher-blush.png"); }
+.avatar-button[data-outfit="teacher"][data-emotion="pout"] .sprite { background-image: url("assets/xiaoling-teacher-pout.png"); }
+.avatar-button[data-outfit="teacher"][data-emotion="proud"] .sprite { background-image: url("assets/xiaoling-teacher-proud.png"); }
+
+.avatar-button[data-outfit="swimsuit"][data-emotion="neutral"] .sprite { background-image: url("assets/xiaoling-swimsuit-neutral.png"); }
+.avatar-button[data-outfit="swimsuit"][data-emotion="happy"] .sprite { background-image: url("assets/xiaoling-swimsuit-happy.png"); }
+.avatar-button[data-outfit="swimsuit"][data-emotion="angry"] .sprite { background-image: url("assets/xiaoling-swimsuit-angry.png"); }
+.avatar-button[data-outfit="swimsuit"][data-emotion="sad"] .sprite { background-image: url("assets/xiaoling-swimsuit-sad.png"); }
+.avatar-button[data-outfit="swimsuit"][data-emotion="blush"] .sprite,
+.avatar-button[data-outfit="swimsuit"][data-emotion="shy"] .sprite { background-image: url("assets/xiaoling-swimsuit-blush.png"); }
+.avatar-button[data-outfit="swimsuit"][data-emotion="pout"] .sprite { background-image: url("assets/xiaoling-swimsuit-pout.png"); }
+.avatar-button[data-outfit="swimsuit"][data-emotion="proud"] .sprite { background-image: url("assets/xiaoling-swimsuit-proud.png"); }
+
+.avatar-button[data-outfit="bikini"][data-emotion="neutral"] .sprite { background-image: url("assets/xiaoling-bikini-neutral.png"); }
+.avatar-button[data-outfit="bikini"][data-emotion="happy"] .sprite { background-image: url("assets/xiaoling-bikini-happy.png"); }
+.avatar-button[data-outfit="bikini"][data-emotion="angry"] .sprite { background-image: url("assets/xiaoling-bikini-angry.png"); }
+.avatar-button[data-outfit="bikini"][data-emotion="sad"] .sprite { background-image: url("assets/xiaoling-bikini-sad.png"); }
+.avatar-button[data-outfit="bikini"][data-emotion="blush"] .sprite,
+.avatar-button[data-outfit="bikini"][data-emotion="shy"] .sprite { background-image: url("assets/xiaoling-bikini-blush.png"); }
+.avatar-button[data-outfit="bikini"][data-emotion="pout"] .sprite { background-image: url("assets/xiaoling-bikini-pout.png"); }
+.avatar-button[data-outfit="bikini"][data-emotion="proud"] .sprite { background-image: url("assets/xiaoling-bikini-proud.png"); }
+
+@keyframes breathe {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+
+  50% {
+    transform: translateY(-3px) scale(1.012);
+  }
+}
+
+@keyframes happy-bounce {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0);
+  }
+
+  50% {
+    transform: translateY(-7px) rotate(1.5deg);
+  }
+}
+
+@keyframes angry-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-3px) rotate(-1deg);
+  }
+
+  75% {
+    transform: translateX(3px) rotate(1deg);
+  }
+}
+
+@keyframes sad-sway {
+  0%,
+  100% {
+    transform: translateY(2px) rotate(-1deg);
+  }
+
+  50% {
+    transform: translateY(7px) rotate(1deg);
+  }
+}
+
+@keyframes pout-sulk {
+  0%,
+  100% {
+    transform: translateX(0) rotate(-1deg);
+  }
+
+  45% {
+    transform: translateX(-5px) rotate(-2deg);
+  }
+
+  70% {
+    transform: translateX(2px) rotate(1deg);
+  }
+}
+
+@keyframes shy-bob {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+
+  50% {
+    transform: translateY(3px) scale(0.992);
+  }
+}
+
+.bubble {
+  max-width: 250px;
+  margin: 0 0 8px;
+  padding: 10px 12px;
+  color: #2d2730;
+  font-size: 13px;
+  line-height: 1.45;
+  background: var(--paper);
+  border: 1px solid rgba(222, 126, 144, 0.42);
+  border-radius: 8px;
+  box-shadow: 0 14px 28px var(--shadow);
+}
+
+.mini-reply {
+  position: absolute;
+  right: 188px;
+  bottom: 82px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 42px;
+  gap: 7px;
+  width: 250px;
+  padding: 8px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: 0 18px 46px var(--shadow);
+  backdrop-filter: blur(14px);
+}
+
+.chat-panel,
+.settings-shell {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: 0 18px 46px var(--shadow);
+  backdrop-filter: blur(14px);
+}
+
+.chat-panel {
+  position: absolute;
+  right: 160px;
+  bottom: 34px;
+  display: grid;
+  grid-template-rows: auto 1fr auto auto;
+  width: min(380px, calc(100vw - 24px));
+  height: min(540px, calc(100vh - 24px));
+  overflow: hidden;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px;
+  border-bottom: 1px solid var(--line);
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+h1,
+h2 {
+  font-size: 18px;
+  line-height: 1.1;
+}
+
+.panel-header p {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.header-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.icon-button {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  color: var(--ink);
+  background: #fff7f8;
+  border: 1px solid rgba(233, 125, 145, 0.28);
+  border-radius: 8px;
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  min-height: 0;
+  padding: 14px;
+  overflow-y: auto;
+}
+
+.message {
+  max-width: 88%;
+  padding: 9px 11px;
+  font-size: 13px;
+  line-height: 1.5;
+  border-radius: 8px;
+}
+
+.message.user {
+  align-self: flex-end;
+  color: #fff;
+  background: #6b76d9;
+}
+
+.message.assistant {
+  align-self: flex-start;
+  background: #fff2f4;
+  border: 1px solid rgba(233, 125, 145, 0.2);
+}
+
+.composer {
+  display: grid;
+  grid-template-columns: 1fr 72px;
+  gap: 8px;
+  padding: 10px 12px;
+  border-top: 1px solid var(--line);
+}
+
+textarea,
+input,
+select {
+  width: 100%;
+  min-width: 0;
+  padding: 9px 10px;
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid rgba(75, 69, 88, 0.18);
+  border-radius: 8px;
+  outline: none;
+}
+
+textarea {
+  resize: none;
+}
+
+.composer button,
+.quick-actions button,
+.inline-form button,
+.mini-reply button,
+#saveSettingsButton,
+.danger-button {
+  color: #fff;
+  font-weight: 700;
+  background: var(--rose);
+  border: 0;
+  border-radius: 8px;
+}
+
+.danger-button {
+  justify-self: start;
+  padding: 10px 12px;
+  background: #c84a5e;
+}
+
+.quick-actions {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  padding: 0 12px 12px;
+}
+
+.quick-actions button {
+  min-height: 34px;
+  font-size: 12px;
+}
+
+.settings-panel {
+  position: absolute;
+  inset: 10px;
+  display: grid;
+  place-items: center;
+  background: rgba(37, 32, 45, 0.18);
+}
+
+.settings-shell {
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  width: min(760px, calc(100vw - 20px));
+  max-height: calc(100vh - 20px);
+  overflow: hidden;
+}
+
+.tabs {
+  display: flex;
+  gap: 6px;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line);
+}
+
+.tab {
+  padding: 8px 12px;
+  color: var(--muted);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 8px;
+}
+
+.tab.selected {
+  color: var(--ink);
+  background: #fff2f4;
+  border-color: rgba(233, 125, 145, 0.22);
+}
+
+.tab-page {
+  display: grid;
+  gap: 12px;
+  min-height: 0;
+  padding: 14px;
+  overflow-y: auto;
+}
+
+label {
+  display: grid;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.checkbox input {
+  width: auto;
+}
+
+.split-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.inline-form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px;
+}
+
+.launch-form {
+  grid-template-columns: 0.8fr 1.3fr 82px auto;
+}
+
+.list {
+  display: grid;
+  gap: 8px;
+}
+
+.list-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  align-items: center;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.68);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.list-item small {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+}
+
+.item-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.item-actions button {
+  padding: 6px 8px;
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.hidden {
+  display: none !important;
+}

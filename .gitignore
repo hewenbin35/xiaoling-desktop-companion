@@ -1,0 +1,25 @@
+node_modules/
+dist/
+*.log
+*.out.log
+*.err.log
+npm-debug.log*
+electron-smoke.*.log
+packaged-smoke.*.log
+
+# Local user data and build leftovers
+*.sqlite
+*.db
+*.zip
+*.exe
+*.msi
+*.nupkg
+out/
+release/
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
