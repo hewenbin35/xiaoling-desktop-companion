@@ -22,6 +22,14 @@ Xiaoling Desktop Companion is a Windows-first floating AI companion app. It cent
 
 ## Quick Start
 
+中文用户教程：
+
+- [小澪桌面助手中文使用教程](docs/使用教程-中文.md)
+
+下载免安装软件包：
+
+- 打开 [Releases](https://github.com/hewenbin35/xiaoling-desktop-companion/releases)，下载 `XiaolingCompanion-0.1.0-win-x64.zip`
+
 ```powershell
 npm install
 npm start
@@ -79,4 +87,3 @@ styles.css              App styling
 ## English Summary
 
 Xiaoling is not just another chat window. She is a desktop-native companion that lives beside your work. The product direction focuses on three principles: never block normal desktop use, be proactive but controllable, and keep memory transparent and deletable. She can be highly present, quietly idle during quiet hours, optionally observe the desktop, and only remembers what the user allows.
-
