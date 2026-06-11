@@ -28,7 +28,7 @@ Xiaoling Desktop Companion is a Windows-first floating AI companion app. It cent
 
 下载免安装软件包：
 
-- 打开 [Releases](https://github.com/hewenbin35/xiaoling-desktop-companion/releases)，下载 `XiaolingCompanion-0.1.0-win-x64.zip`
+- 打开 [Releases](https://github.com/hewenbin35/xiaoling-desktop-companion/releases)，下载 `小澪桌面助手-0.1.0-win-x64.zip`
 
 ```powershell
 npm install
@@ -47,8 +47,8 @@ npm run dist
 
 Generated files:
 
-- `dist/XiaolingCompanion-0.1.0-win-x64/XiaolingCompanion.exe`
-- `dist/XiaolingCompanion-0.1.0-win-x64.zip`
+- `dist/小澪桌面助手-0.1.0-win-x64/小澪桌面助手.exe`
+- `dist/小澪桌面助手-0.1.0-win-x64.zip`
 
 ## API Configuration
 

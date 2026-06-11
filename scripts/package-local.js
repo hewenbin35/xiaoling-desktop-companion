@@ -6,14 +6,14 @@ const root = path.resolve(__dirname, "..");
 const electronDist = path.join(root, "node_modules", "electron", "dist");
 const outputRoot = path.join(root, "dist");
 const appName = "小澪桌面助手";
-const exeName = "XiaolingCompanion.exe";
-const folderName = "XiaolingCompanion";
+const exeName = "小澪桌面助手.exe";
+const folderName = "小澪桌面助手";
 const version = require(path.join(root, "package.json")).version;
 const portableDir = path.join(outputRoot, `${folderName}-${version}-win-x64`);
 const appDir = path.join(portableDir, "resources", "app");
 const zipPath = path.join(outputRoot, `${folderName}-${version}-win-x64.zip`);
-const stalePortableDir = path.join(outputRoot, `${appName}-${version}-win-x64`);
-const staleZipPath = path.join(outputRoot, `${appName}-${version}-win-x64.zip`);
+const stalePortableDir = path.join(outputRoot, `XiaolingCompanion-${version}-win-x64`);
+const staleZipPath = path.join(outputRoot, `XiaolingCompanion-${version}-win-x64.zip`);
 
 const appFiles = [
   "index.html",
